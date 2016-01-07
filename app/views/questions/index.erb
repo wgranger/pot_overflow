@@ -2,6 +2,18 @@
 
 <ul>
 	<% @questions.each do |question| %>
-		<li><a href="/question/<%= question.id %>"><%= question.title %></a></li>
+		<div class="question-summary">
+			<div class="summary">
+				<a href="/questions/<%= question.id %>"><%= question.title %></a>
+			</div>
+			<div class="">
+				<div class="votes">
+					<%= question.votes.length %> votes
+				</div>
+				<div class="answers">
+					<%= question.answers.length %> answers
+				</div>
+			</div>
+		</div>
 	<% end %>
 </ul>
