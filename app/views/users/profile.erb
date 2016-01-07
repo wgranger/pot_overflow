@@ -2,7 +2,9 @@
 <h2><%= @user.email %><h2>
 
 <% if @success %>
-<p> <%= @success %></p>
+<div class="alert alert-success">
+  <strong>Success!</strong> <%= @success %>
+</div>
 <% end %>
 
 <h2>Recent Questions</h2>
