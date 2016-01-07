@@ -1,13 +1,15 @@
-<h1>New Question Form</h1>
+<div class="body-container">
+  <h1>New Question Form</h1>
 
-<% if @fail %>
-<div class="alert alert-danger">
-  <strong>Whoops!</strong> <%= @fail %>
+  <% if @fail %>
+  <div class="alert alert-danger">
+    <strong>Whoops!</strong> <%= @fail %>
+  </div>
+  <% end %>
+
+  <form action="/questions" method="post">
+    <input type="text" name="question[title]" placeholder="Title">
+    <textarea class="form-control" rows="3" name="question[content]"placeholder="New Question"></textarea>
+    <input type= "submit">
+  </form>
 </div>
-<% end %>
-
-<form action="/questions" method="post">
-  <input type="text" name="question[title]" placeholder="Title">
-  <textarea class="form-control" rows="3" name="question[content]"placeholder="New Question"></textarea>
-  <input type= "submit">
-</form>
