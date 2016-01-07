@@ -8,12 +8,20 @@ get '/questions/:id' do
 	erb :'questions/show'
 end
 
-post 'questions/:id/comment/new' do
+get '/questions/:question_id/comments/new' do
+  @question = Question.find_by(id: params[:question_id])
+  erb :"comments/new", layout: false
 end
 
-post 'questions/:id/answer/new' do
+post '/questions/:question_id/comments' do
+  comment = Comment.new()
 end
 
-post 'questions/:id/answer/:id/comment' do
+post '/questions/:question_id/answers' do
+end
+
+
+
+post '/questions/:question_id/answers/:answer_id/comments' do
 
 end
