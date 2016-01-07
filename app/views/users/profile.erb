@@ -2,17 +2,16 @@
   <h1>Welcome back, <%= @user.name.capitalize %></h1>
 
   <% if @success %>
-  <p> <%= @success %></p>
+      <p class="alert alert-success col-md" role="alert"><%= @success %></p>
   <% end %>
 
   <h2>Recent Questions You've Asked</h2>
-    <% @user.questions.each do |question| %>
-      <h3> <%= question.title %></h3>
-      <p><%= question.content %></p>
-    <% end %>
+  <% @user.questions.each do |question| %>
+    <h3> <%= question.title %></h3>
+    <p><%= question.content %></p>
+  <% end %>
 
   <a href="#" data-toggle="modal" data-target="#new_question_modal"><button id="new_question_button">New Question</button></a>
-  <!-- <a href="/questions/new"><button id="new_question_button">Submit New Question</button></a> -->
 
   <h2>Recent Answers</h2>
   <div class="row">

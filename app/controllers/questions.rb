@@ -14,7 +14,7 @@ post '/questions' do
   @question = Question.new(params[:question])
   @question.author = current_user
   if @question.save
-    @success =  "Your message has been posted."
+    @success = "Your message has been posted."
     @user = current_user
     erb :'users/profile'
   else
