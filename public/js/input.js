@@ -20,7 +20,8 @@ $(document).ready(function() {
   }
 
   function onSuccess(response) {
-    var message = '<div class="alert alert-danger" role="alert"><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span><span class="sr-only">Error:</span>'+response[:response]+'</div>';
+    var responseJSON = $.parseJSON(response)
+    var message = '<div class="alert alert-danger" role="alert"><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span><span class="sr-only">Error:</span>'+responseJSON.response+'</div>';
     if ($("#input_form")[0]){
     $("#input_form").replace(message);
   }};

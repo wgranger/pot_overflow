@@ -1,6 +1,12 @@
 <div id="question-container"> <!-- changed id='body-container' to 'question-containter' -->
-  <ul id="questions-section">
+  <ul id="questions-section" class="list-unstyled">
     <li id="question">
+      <a href='/questions/<%= @question.id %>/upvote' id="voter" class="glyphicon glyphicon-thumbs-up block"></a>
+      <p class="block" id="vote-count"><%= @question.votes.count %></p>
+      <a href='/question/<%= @question.id %>/downvote' id="voter" class="glyphicon glyphicon-thumbs-down block"></a>
+      <%= erb :"questions/_one-question", locals: {question: @question} %>
+    
+
       <h1>Question: <%= @question.title %></h1>
       <p><%= @question.content %></p>
       <a href="/questions/<%= @question.id %>/answers/new" id="answer_link"><button>Answer Question</button></a>
@@ -9,9 +15,6 @@
     </li>
     <% if @comments_answers %>
       <% @comments_answers.each do |thing| %>
-        <% p "@@@@@@@@@@@" %>
-        <% p thing %>
-        <% p thing.methods %>
           <ul>
             <li><p>Author:<%= thing.author.name %></p></li>
             <li><p>Content: <%= thing.content %></p></li>
