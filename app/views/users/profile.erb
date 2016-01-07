@@ -1,6 +1,10 @@
 <h1>Welcome Back, <%= @user.name %></h1>
 <h2><%= @user.email %><h2>
 
+<% if @success %>
+<p> <%= @success %></p>
+<% end %>
+
 <h2>Recent Questions</h2>
 <div class="row">
   <% @user.questions.each do |question| %>
