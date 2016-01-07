@@ -25,4 +25,8 @@ $(document).ready(function() {
     $("#input_form").replace(message);
   }};
 
+
+  $(".modal").on("hidden.bs.modal", function(){
+      $(".modal-body1").html("");
+  });
 });
