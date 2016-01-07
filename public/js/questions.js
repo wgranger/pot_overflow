@@ -1,12 +1,7 @@
 
 $(document).ready(function() {
-      // var questionID = $("#question_id").text();
 
-
-      // onButtonClick($("#question"), $("#comment_form"));
-
-      // console.log($("comment_form"));
-
+      var question_id = $("#question_id").text();
 
       $("#comment_link").on("click", function(event){
         event.preventDefault();
@@ -21,7 +16,6 @@ $(document).ready(function() {
 
         request.done(function(response){
           $("#question").append(response);
-          console.log(response)
         })
 
       })
@@ -29,8 +23,23 @@ $(document).ready(function() {
 
       $("#question").on("submit", "#comment_form", function(event){
         event.preventDefault();
-        // var url = $(this).attr
-        // ajaxRequest("POST", )
+        var url = $("#question a").attr("href");
+        var comment_data = $("#comment_form").serialize();
+        console.log(comment_data);
+        var request = $.ajax({
+                            method: "post",
+                            url: "/questions/" + question_id + "/comments",
+                            data: comment_data
+                            })
+        request.done(function(response){
+          $("#comment_form").hide();
+          $('#comment_link').show();
+        })
+
+        request.done(function(response){
+          $("#question").append(response);
+          console.log(response);
+        })
       });
 
 
@@ -40,7 +49,6 @@ $(document).ready(function() {
       url: ajaxUrl,
       success: onResult,
       error: onError
-
     });
   }
 });

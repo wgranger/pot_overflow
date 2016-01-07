@@ -4,6 +4,7 @@
     <li id="question">
       <%= erb :"questions/_one-question", locals: {question: @question} %>
       <button id="answer_button">Answer Question</button>
+      <span id="question_id" hidden><%= @question.id %></span>
       <a href="/questions/<%= @question.id %>/comments/new" id="comment_link"><button>Add Comment</button></a>
     </li>
   </ul>
