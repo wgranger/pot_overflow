@@ -3,9 +3,17 @@
   <ul id="questions-section">
     <li id="question">
       <%= erb :"questions/_one-question", locals: {question: @question} %>
-      <button id="answer_button">Answer Question</button>
-      <span id="question_id" hidden><%= @question.id %></span>
+      <a href="/questions/<%= @question.id %>/answers/new" id="answer_link"><button>Answer Question</button></a>
       <a href="/questions/<%= @question.id %>/comments/new" id="comment_link"><button>Add Comment</button></a>
+      <span id="question_id" hidden><%= @question.id %></span>
     </li>
+    <% if @comments %>
+      <% @comments.each do |comment| %>
+          <ul>
+            <li><%= comment.author.name %></li>
+            <li><%= comment.content %></li>
+          </ul>
+      <% end %>
+    <% end %>
   </ul>
 </div>
