@@ -2,7 +2,8 @@
 <div id="question-container"> <!-- changed id='body-container' to 'question-containter' -->
   <ul id="questions-section">
     <li id="question">
-      <%= erb :"questions/_one-question", locals: {question: @question} %>
+      <h1>Question: <%= @question.title %></h1>
+      <p><%= @question.content %></p>
       <a href="/questions/<%= @question.id %>/answers/new" id="answer_link"><button>Answer Question</button></a>
       <a href="/questions/<%= @question.id %>/comments/new" id="comment_link"><button>Add Comment</button></a>
       <span id="question_id" hidden><%= @question.id %></span>
@@ -13,9 +14,9 @@
         <% p thing %>
         <% p thing.methods %>
           <ul>
-            <li><p>Author:</p><%= thing.author.name %></li>
-            <li><p>Content: </p><%= thing.content %></li>
-            <li><p>Type: </p><%= thing.class %></li>
+            <li><p>Author:<%= thing.author.name %></p></li>
+            <li><p>Content: <%= thing.content %></p></li>
+            <li><p>Type: <%= thing.class %></p></li>
           </ul>
       <% end %>
     <% end %>
