@@ -8,17 +8,30 @@ end
 
 post "/login" do
   user = User.find_by(name: params[:name])
-  if user != nil
-    if user.authenticate(params[:name], params[:password])
-     session[:user_id] = user.id
-     redirect "/"
+  if request.xhr?
+    if user != nil
+      if user.authenticate(params[:name], params[:password])
+        session[:user_id] = user.id
+        redirect "/"
+      else
+       request = { :error => true, :response => "Your password is incorrect."}
+      end
     else
-     @error = "Your password is incorrect."
-     erb :login
+       request = { :error => true, :response => "We could not find your username."}
     end
   else
-     @error = "We could not find your username."
-     erb :login
+    if user != nil
+      if user.authenticate(params[:name], params[:password])
+       session[:user_id] = user.id
+       redirect "/"
+      else
+       @error = "Your password is incorrect."
+       erb :login
+      end
+    else
+       @error = "We could not find your username."
+       erb :login
+    end
   end
 end
 
