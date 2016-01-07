@@ -1,3 +1,6 @@
 .intro-container {
-  padding-top: 10%;
+  padding-top: 100px;
+}
+#body-container {
+	margin-left: 15%;
 }

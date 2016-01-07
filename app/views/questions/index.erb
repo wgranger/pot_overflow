@@ -1,19 +1,12 @@
-<h1>Questions</h1>
-
-<ul>
+<div id="body-container">
 	<% @questions.each do |question| %>
-		<div class="question-summary">
-			<div class="summary">
-				<a href="/questions/<%= question.id %>"><%= question.title %></a>
-			</div>
-			<div class="">
-				<div class="votes">
-					<%= question.votes.length %> votes
-				</div>
-				<div class="answers">
-					<%= question.answers.length %> answers
-				</div>
-			</div>
+		<div class="col-md-12">
+			<ul class="nav nav-pills" role="tablist">
+				<li role="presentation" class="active"><a href="/questions/<%= question.id %>"><span class="badge"> <%= question.votes.length %> </span>  votes  </a></li>
+				<li role="presentation" class="active"><a href="/questions/<%= question.id %>"><span class="badge"> <%= question.answers.length %> </span> answers</a> </li>
+				<li class="col-md-8"><strong style="font-size: 24px;"><a href="/questions/<%= question.id %>"><%= question.title %></a></strong></li>
+			</ul>
+		<br />
 		</div>
 	<% end %>
-</ul>
+</div>
