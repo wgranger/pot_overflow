@@ -17,7 +17,8 @@ end
 post '/user/new' do
   new_user = User.new(params[:user])
   if new_user.save
-    redirect '/login'
+    session[:user_id] = new_user.id
+    redirect '/questions'
   else
     @error = "You must include a unique username and email, as well as a password."
     erb :'users/new'
