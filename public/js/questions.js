@@ -40,7 +40,7 @@ $(document).ready(function() {
           console.log(response);
         })
       });
-
+      //this is for answer button which gets answer form
       $("#answer_link").on("click", function(event){
         event.preventDefault();
 
@@ -57,16 +57,16 @@ $(document).ready(function() {
         });
       });
 
-
+      //this is for answer form submit button
       $("#question").on("submit", "#answer_form", function(event){
         event.preventDefault();
         var url = $("#question a#answer_link").attr("href");
         var answer_data = $("#answer_form").serialize();
-        console.log(comment_data);
+        console.log(answer_data);
         var request = $.ajax({
                             method: "post",
                             url: "/questions/" + question_id + "/answers",
-                            data: comment_data
+                            data: answer_data
                             })
         request.done(function(response){
           $("#answer_form").hide();

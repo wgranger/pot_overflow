@@ -7,11 +7,15 @@
       <a href="/questions/<%= @question.id %>/comments/new" id="comment_link"><button>Add Comment</button></a>
       <span id="question_id" hidden><%= @question.id %></span>
     </li>
-    <% if @comments %>
-      <% @comments.each do |comment| %>
+    <% if @comments_answers %>
+      <% @comments_answers.each do |thing| %>
+        <% p "@@@@@@@@@@@" %>
+        <% p thing %>
+        <% p thing.methods %>
           <ul>
-            <li><%= comment.author.name %></li>
-            <li><%= comment.content %></li>
+            <li><p>Author:</p><%= thing.author.name %></li>
+            <li><p>Content: </p><%= thing.content %></li>
+            <li><p>Type: </p><%= thing.class %></li>
           </ul>
       <% end %>
     <% end %>
