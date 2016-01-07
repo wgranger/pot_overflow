@@ -1,7 +1,14 @@
 #show
 get "/profile" do
+
   if current_session?
+    p session
+    p session[:id]
+      p current_session?
+      p current_user
     @user = current_user
+    p @user
+    logger.info @user
     erb :'users/profile'
   else
     redirect '/'
