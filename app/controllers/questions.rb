@@ -14,14 +14,12 @@ post '/questions' do
   @question = Question.new(params[:question])
   @question.author = current_user
   if @question.save
-    @success = "Your message has been posted."
-    @user = current_user
-    erb :'users/profile'
+    @success = "Your question has been posted."
   else
-    @fail = "Your message did not post."
-    #still need to add fail to erb
-    erb :'questions/new'
+    @failure = "We were unable to post your question. Please try again."
   end
+  @user = current_user
+  erb :'users/profile'
 end
 
 get '/questions/:id' do

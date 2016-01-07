@@ -2,21 +2,27 @@
   <h1>Welcome back, <%= @user.name.capitalize %></h1>
 
   <% if @success %>
-      <p class="alert alert-success col-md" role="alert"><%= @success %></p>
+    <div class="row">
+      <p class="alert alert-success col-md-3" role="alert"><%= @success %></p>
+    </div>
+  <% elsif @fail %>
+    <div class="row">
+      <p class="alert alert-danger col-md-3" role="alert"><%= @failure %></p>
+    </div>
   <% end %>
 
-  <h2>Recent Questions You've Asked</h2>
+  <h2>Questions you've asked</h2>
   <% @user.questions.each do |question| %>
-    <h3> <%= question.title %></h3>
-    <p><%= question.content %></p>
+    <h3><a href="/questions/<%= question.id %>"><%= question.title %></a></h3>
+    <p><%= question.content[0..150] %>...</p>
   <% end %>
 
-  <a href="#" data-toggle="modal" data-target="#new_question_modal"><button id="new_question_button">New Question</button></a>
+  <a href="#new_question_modal" data-toggle="modal" data-target="#new_question_modal"><button id="new_question_button">New Question</button></a>
 
-  <h2>Recent Answers</h2>
+  <h2>Answers you've written</h2>
   <div class="row">
     <% @user.answers.each do |answer| %>
-      <p><%= answer.content %></p>
+      <p><a href="/questions/<%= answer.question.id %>"><%= answer.content[0..150] %>...</a></p>
     <% end %>
   </div>
 </div>
