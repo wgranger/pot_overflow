@@ -1,7 +1,10 @@
 
 <div id="question-container"> <!-- changed id='body-container' to 'question-containter' -->
-  <ul id="questions-section">
+  <ul id="questions-section" class="list-unstyled">
     <li id="question">
+      <a href='/questions/<%= @question.id %>/upvote' id="voter" class="glyphicon glyphicon-thumbs-up block"></a>
+      <p class="block" id="vote-count"><%= @question.votes.count %></p>
+      <a href='/question/<%= @question.id %>/downvote' id="voter" class="glyphicon glyphicon-thumbs-down block"></a>
       <%= erb :"questions/_one-question", locals: {question: @question} %>
       <button id="answer_button">Answer Question</button>
       <a href="/questions/<%= @question.id %>/comments/new" id="comment_link"><button>Add Comment</button></a>

@@ -45,3 +45,26 @@ end
 post '/questions/:question_id/answers/:answer_id/comments' do
 
 end
+
+get '/questions/:id/upvote' do
+  question = Question.find(params[:id])
+  question.votes.create(value: 1, voter_id: session[:user_id])
+  vote_count = question.vote_count
+  if request.xhr?
+    response = vote_count.to_s
+  else
+    redirect "/questions/#{params[:id]}"
+  end
+end
+
+get '/questions/:id/downvote' do
+  question = Question.find(params[:id])
+  question.votes.create(value: -1, voter_id: session[:user_id])
+  vote_count = question.vote_count
+  if request.xhr?
+    response = vote_count.to_s
+  else
+    redirect "/questions/#{params[:id]}"
+  end
+end
+
