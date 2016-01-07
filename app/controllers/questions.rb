@@ -19,6 +19,7 @@ post '/questions' do
     erb :'users/profile'
   else
     @fail = "Your message did not post."
+    #still need to add fail to erb
     erb :'questions/new'
   end
 end
