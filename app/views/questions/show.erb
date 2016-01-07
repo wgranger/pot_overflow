@@ -1,4 +1,18 @@
-<div id="body-container">
-	<h1><%= @question.title %></h1>
-	<p><%= @question.content %></p>
+
+<div id="question-container"> <!-- changed id='body-container' to 'question-containter' -->
+  <ul id="questions-section">
+    <li id="question">
+    	<h1><%= @question.title %></h1>
+    	<p><%= @question.content %></p>
+      <button id="answer_button">Answer Question</button>
+      <button id="comment_button">Add Comment</button>
+    </li>
+  </ul>
 </div>
+
+<!-- <form action='questions/<%= @question.id %>/comment/new' method='post' >
+<input id="authorName" type="text" name="author_name" placeholder="Username">
+<input type="submit" value="Create Post">
+<textarea rows="10" cols="30" name="comment" placeholder="Comment"></textarea>
+</form>
+ -->
