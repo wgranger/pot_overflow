@@ -25,6 +25,11 @@ end
 
 get '/questions/:id' do
 	@question = Question.find(params[:id])
+  @comments_answers = Comment.where(commentable_type: "Question", commentable_id: @question.id)
+  answers = Answer.where(question_id: @question.id)
+  @comments_answers << answers
+  p "@@@@@@@@@@@@@@@@"
+  @comments_answers = @comments_answers.flatten
 	erb :'questions/show'
 end
 
@@ -34,10 +39,40 @@ get '/questions/:question_id/comments/new' do
 end
 
 post '/questions/:question_id/comments' do
-  comment = Comment.new()
+  user_id = session[:user_id]
+
+  if request.xhr?
+    puts "ajax request called"
+    content = params[:content]
+    comment = Comment.new(author_id: user_id, content: content)
+    question = Question.find(params[:question_id])
+    if question.comments << comment
+      comment.save
+    else
+      puts "Error, Danger Will Robinson!"
+    end
+  end
+end
+
+get '/questions/:question_id/answers/new' do
+  @question = Question.find_by(id: params[:question_id])
+  erb :"answers/new", layout: false
 end
 
 post '/questions/:question_id/answers' do
+  user_id = session[:user_id]
+
+  if request.xhr?
+    puts "ajax request called"
+    content = params[:content]
+    answer = Answer.new(author_id: user_id, content: content)
+    question = Question.find(params[:question_id])
+    if question.answers << answer
+      answer.save
+    else
+      puts "Error, Danger Will Robinson!"
+    end
+  end
 end
 
 
