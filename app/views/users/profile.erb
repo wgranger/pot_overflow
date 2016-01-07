@@ -1,15 +1,17 @@
-<h1>Welcome back <%= @user.name %></h1>
+<h1>Welcome Back, <%= @user.name %></h1>
 <h2><%= @user.email %><h2>
 
-<h2>Rencent Questions</h2>
+<h2>Recent Questions</h2>
 <div class="row">
   <% @user.questions.each do |question| %>
     <div class="col-md-9 col-md-push-3"><%= question.title %></div>
     <div class="col-md-3 col-md-pull-9"><%= question.title %></div>
   <% end %>
-</div>
 
-<h2>Rencent Answers</h2>
+</div>
+<a href="/questions/new"><button id="new_question_button">Submit New Question</button></a>
+
+<h2>Recent Answers</h2>
 <div class="row">
   <% @user.answers.each do |answer| %>
     <div class="col-md-9 col-md-push-3"><%= answer.title %></div>
@@ -17,5 +19,4 @@
   <% end %>
 </div>
 
-<a href="/questions/new"><button type="button" class="btn btn-primary btn-lg btn-block">Submit New Question</button></a>
 
