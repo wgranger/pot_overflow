@@ -125,8 +125,8 @@ namespace :db do
     puts "Current version: #{ActiveRecord::Migrator.current_version}"
   end
 
-  desc 'You only live once'
-  task 'yolo' => ['db:drop', 'db:create', 'db:migrate', 'db:seed'] do
+  desc "You only live once"
+  task :yolo => ['db:drop', 'db:create', 'db:migrate', 'db:seed'] do
     exec "bundle exec shotgun config.ru"
   end
 
