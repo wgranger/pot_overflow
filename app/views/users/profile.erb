@@ -1,28 +1,27 @@
-<h1>Welcome Back, <%= @user.name %></h1>
-<h2><%= @user.email %><h2>
+<div class="body-container">
+  <h1>Welcome back, <%= @user.name.capitalize %></h1>
+  <% if @success %>
+    <div class="row">
+      <p class="alert alert-success col-md-3" role="alert"><%= @success %></p>
+    </div>
+  <% elsif @fail %>
+    <div class="row">
+      <p class="alert alert-danger col-md-3" role="alert"><%= @failure %></p>
+    </div>
+  <% end %>
 
-<% if @success %>
-<div class="alert alert-success">
-  <strong>Success!</strong> <%= @success %>
-</div>
-<% end %>
-
-<h2>Recent Questions</h2>
-<div class="row">
+  <h2>Questions you've asked</h2>
   <% @user.questions.each do |question| %>
-    <div class="col-md-9 col-md-push-3"><%= question.title %></div>
-    <div class="col-md-3 col-md-pull-9"><%= question.title %></div>
+    <h3><a href="/questions/<%= question.id %>"><%= question.title %></a></h3>
+    <p><%= question.content[0..150] %>...</p>
   <% end %>
 
+  <a href="#new_question_modal" data-toggle="modal" data-target="#new_question_modal"><button id="new_question_button">New Question</button></a>
+
+  <h2>Answers you've written</h2>
+  <div class="row">
+    <% @user.answers.each do |answer| %>
+      <p><a href="/questions/<%= answer.question.id %>"><%= answer.content[0..150] %>...</a></p>
+    <% end %>
+  </div>
 </div>
-<a href="/questions/new"><button id="new_question_button">Submit New Question</button></a>
-
-<h2>Recent Answers</h2>
-<div class="row">
-  <% @user.answers.each do |answer| %>
-    <div class="col-md-9 col-md-push-3"><%= answer.title %></div>
-    <div class="col-md-3 col-md-pull-9"><%= answer.title %></div>
-  <% end %>
-</div>
-
-

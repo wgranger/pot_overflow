@@ -8,6 +8,7 @@ end
 
 post "/login" do
   user = User.find_by(name: params[:name])
+  puts user
   if request.xhr?
     if user != nil
       if user.authenticate(params[:name], params[:password])
