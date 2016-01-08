@@ -2,11 +2,11 @@
 <div id="question-container"> <!-- changed id='body-container' to 'question-containter' -->
   <ul id="questions-section" class="list-unstyled">
     <li id="question">
-      <a href='/questions/<%= @question.id %>/upvote' id="voter" class="glyphicon glyphicon-thumbs-up block"></a>
-      <p class="block" id="vote-count"><%= @question.votes.count %></p>
-      <a href='/question/<%= @question.id %>/downvote' id="voter" class="glyphicon glyphicon-thumbs-down block"></a>
+      <a href='/questions/<%= @question.id %>/upvote' class="glyphicon glyphicon-thumbs-up block voter"></a>
+      <p class="block" id="vote-count"><%= @question.vote_count %></p>
+      <a href='/questions/<%= @question.id %>/downvote' class="glyphicon glyphicon-thumbs-down block voter"></a>
       <%= erb :"questions/_one-question", locals: {question: @question} %>
-    
+
 
       <h1>Question: <%= @question.title %></h1>
       <p><%= @question.content %></p>
@@ -15,13 +15,20 @@
       <span id="question_id" hidden><%= @question.id %></span>
     </li>
     <% if @comments_answers %>
-      <% @comments_answers.each do |thing| %>
+      <% @comments_answers.each do |commentable| %>
           <ul>
-            <li><p>Author:<%= thing.author.name %></p></li>
-            <li><p>Content: <%= thing.content %></p></li>
-            <li><p>Type: <%= thing.class %></p></li>
+            <% if commentable.is_a?(Answer) %>
+                <a href='/questions/<%= @question.id %>/answers/<%= commentable.id %>/upvote' class="glyphicon glyphicon-thumbs-up block voter_commentable"></a>
+                <p class="block" id="vote-count_<%=commentable.id%>"><%= commentable.vote_count %></p>
+                <a href='/questions/<%= @question.id %>/answers/<%= commentable.id %>/downvote' class="glyphicon glyphicon-thumbs-down block voter_commentable"></a>
+            <% end %>
+            <li><p>Author:<%= commentable.author.name %></p></li>
+            <li><p>Content: <%= commentable.content %></p></li>
+            <li><p>Type: <%= commentable.class %></p></li>
           </ul>
       <% end %>
     <% end %>
   </ul>
 </div>
+
+
