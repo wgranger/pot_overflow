@@ -24,10 +24,9 @@ end
 
 get '/questions/:id' do
 	@question = Question.find(params[:id])
-  @comments_answers = Comment.where(commentable_type: "Question", commentable_id: @question.id)
-  answers = Answer.where(question_id: @question.id)
-  @comments_answers << answers
-  p "@@@@@@@@@@@@@@@@"
+  @comments_answers = Answer.where(question_id: @question.id)
+  comments = Comment.where(commentable_type: "Question", commentable_id: @question.id)
+  @comments_answers << comments
   @comments_answers = @comments_answers.flatten
 	erb :'questions/show'
 end
@@ -75,9 +74,28 @@ post '/questions/:question_id/answers' do
 end
 
 
+get '/questions/:question_id/answers/:answer_id/upvote' do
+  answer = Answer.find(params[:answer_id])
+  answer.votes.create(value: 1, voter_id: session[:user_id])
+  vote_count = answer.vote_count.to_s
+  if request.xhr?
+    response = { :votes => vote_count, :id => params[:answer_id] }
+    response.to_json
+  else
+    redirect "/questions/#{params[:question_id]}"
+  end
+end
 
-post '/questions/:question_id/answers/:answer_id/comments' do
-
+get '/questions/:question_id/answers/:answer_id/downvote' do
+  answer = Answer.find(params[:answer_id])
+  answer.votes.create(value: -1, voter_id: session[:user_id])
+  vote_count = answer.vote_count
+  if request.xhr?
+    response = { :votes => vote_count, :id => params[:answer_id] }
+    response.to_json
+  else
+    redirect "/questions/#{params[:question_id]}"
+  end
 end
 
 get '/questions/:id/upvote' do
